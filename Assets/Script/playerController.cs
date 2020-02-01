@@ -11,7 +11,7 @@ public class playerController : MonoBehaviour
     [SerializeField] int dashRefreshTime = 2;
     [SerializeField] Vector2 hitPunch = new Vector2(5f, 5f);
 
-    Rigidbody2D myRigidbody;
+    public Rigidbody2D myRigidbody;
     Transform myTransform;
 
     float horizontalDirection = 0f;
