@@ -7,7 +7,6 @@ public class Fire : MonoBehaviour
     public GameObject bubbleBullet;
     public int reload = 1;
     public bool reloaded;
-    public bool reloading;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +15,10 @@ public class Fire : MonoBehaviour
 
     private void fire()
     {
-        if (true){
+        if (reloaded){
         Instantiate (bubbleBullet, gameObject.transform.position, gameObject.transform.rotation);
-        reloaded = false; 
-        reloading = false;
+        reloaded = false;
+         StartCoroutine(Reload()); 
         } 
         
     }
@@ -27,10 +26,6 @@ public class Fire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (reloaded == false & reloading == false)
-        {
-            Reload();
-        }
         if (Input.GetMouseButtonDown(0))
         {
             fire();

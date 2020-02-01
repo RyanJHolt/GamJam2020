@@ -18,15 +18,20 @@ public class Bubbles : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         if (Player.transform.position.x < myTransform.position.x){
             myRigidbody.velocity = new Vector2(speed,0);
-        } else
-        {
+        } else {
             myRigidbody.velocity = new Vector2(-speed,0);
         }
+        StartCoroutine(Despawn());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    IEnumerator Despawn(){
+        yield return new WaitForSeconds(despawnTime);
+        Destroy (gameObject);
     }
 }
