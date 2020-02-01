@@ -9,12 +9,12 @@ public class GameSession : MonoBehaviour
 
     void Awake()
     {
-        
+
     }
 
     private void Start()
     {
-        
+
     }
 
     public void addLives(int num)
@@ -42,7 +42,7 @@ public class GameSession : MonoBehaviour
     {
         plastic -= num;
     }
-
+    
     public int getPlastic()
     {
         return plastic;
