@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameUI : MonoBehaviour
 {
     private GameSession session;
-    [SerializeField] UnityEngine.UI.Text livesCounter, plasticCounter;
+    [SerializeField] TMPro.TMP_Text livesCounter, wasteCounter;
 
     void Start()
     {
@@ -14,6 +14,7 @@ public class GameUI : MonoBehaviour
 
     void Update()
     {
-        livesCounter.text = "" + session.getPlayerLives();
+        wasteCounter.text = "<b>Waste:</b> " + session.getPlastic();
+        livesCounter.text = "<b>Lives:</b> " + session.getPlayerLives();
     }
 }

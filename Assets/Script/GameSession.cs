@@ -9,12 +9,23 @@ public class GameSession : MonoBehaviour
 
     void Awake()
     {
-        
+
     }
 
     private void Start()
     {
-        
+
+    }
+
+    public void addLives(int num)
+    {
+        playerLives += num;
+    }
+
+    public void takeLives(int num)
+    {
+        playerLives -= num;
+        Debug.Log(playerLives);
     }
 
     public int getPlayerLives()
@@ -22,19 +33,18 @@ public class GameSession : MonoBehaviour
         return playerLives;
     }
 
-    public void setPlayerLives(int playerLives)
-    {
-        this.playerLives = playerLives;
-    }
-
     public void addPlastic(int num)
     {
         plastic += num;
-        Debug.Log(plastic);
     }
 
     public void takePlastic(int num)
     {
         plastic -= num;
+    }
+    
+    public int getPlastic()
+    {
+        return plastic;
     }
 }

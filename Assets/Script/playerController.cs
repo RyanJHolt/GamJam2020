@@ -13,10 +13,13 @@ public class playerController : MonoBehaviour
 
     public Rigidbody2D myRigidbody;
     Transform myTransform;
+    GameSession session;
+    BoxCollider2D myBoxCollider;
 
     float horizontalDirection = 0f;
     float verticalDirection = 0f;
     bool dashing = false;
+    bool allowMovement = true;
 
     private float xScale;
 
@@ -25,6 +28,8 @@ public class playerController : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myTransform = GetComponent<Transform>();
+        session = GetComponent<GameSession>();
+        myBoxCollider = GetComponent<BoxCollider2D>();
 
         xScale = myRigidbody.transform.localScale.x;
     }
@@ -38,7 +43,10 @@ public class playerController : MonoBehaviour
         spriteRotation();
     }
 
-    void movement() {
+    void movement()
+    {
+        if (!allowMovement)
+            return;
 
         horizontalDirection = Mathf.Sign(myRigidbody.velocity.x);
         verticalDirection = Mathf.Sign(myRigidbody.velocity.y);
@@ -46,15 +54,16 @@ public class playerController : MonoBehaviour
         float hMovement = Input.GetAxisRaw("Horizontal");
         float vMovement = Input.GetAxisRaw("Vertical");
 
-        myRigidbody.velocity = myRigidbody.velocity + new Vector2(hMovement * horizontalSpeed, vMovement * verticalSpeed);
+        myRigidbody.velocity = myRigidbody.velocity + new Vector2(hMovement * horizontalSpeed, vMovement * verticalSpeed).normalized;
     }
 
     void spriteFLip()
     {
-        if(horizontalDirection == 1)
+        if (horizontalDirection == 1)
         {
             myRigidbody.transform.localScale = new Vector3(xScale, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
-        } else
+        }
+        else
         {
             myRigidbody.transform.localScale = new Vector3(-xScale, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
         }
@@ -74,7 +83,8 @@ public class playerController : MonoBehaviour
             {
                 transform.localEulerAngles = new Vector3(0, 0, 45 * -verticalDirection);
             }
-        } else
+        }
+        else
         {
             transform.localEulerAngles = new Vector3(0, 0, 0);
         }
@@ -82,24 +92,33 @@ public class playerController : MonoBehaviour
 
     void dash()
     {
-        if (Input.GetAxisRaw("Jump") > 0 && !dashing) {
+        if (Input.GetAxisRaw("Jump") > 0 && !dashing)
+        {
             myRigidbody.velocity = myRigidbody.velocity + new Vector2(dashSpeed * horizontalDirection, myRigidbody.velocity.y);
             dashing = true;
             StartCoroutine(resetDash());
         }
     }
 
-    IEnumerator resetDash() {
+    IEnumerator resetDash()
+    {
         yield return new WaitForSeconds(dashRefreshTime);
         dashing = false;
     }
 
+    void deathAnimation()
+    {
+        myBoxCollider.isTrigger = true;
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
-       {
-            myRigidbody.velocity =  hitPunch;
-            //Debug.Log("Hit");
+        if (collision.tag == "Enemy")
+        {
+            deathAnimation();
+            session.takeLives(1);
+            Debug.Log("Hit");
         }
     }
 }
