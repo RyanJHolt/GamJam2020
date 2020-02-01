@@ -6,8 +6,7 @@ public class EnemyAI : MonoBehaviour
 {
 	[SerializeField]private float direction = 1;
 	[SerializeField] private float speed = 3f;
-	[SerializeField] private float detectRange = 10f;
-	[SerializeField] private float Range;
+	[SerializeField] private float detectRange = 15f;
 
 	[Range(10, 400)] public int turnTime;
 	Rigidbody2D myRigidbody;
@@ -16,7 +15,6 @@ public class EnemyAI : MonoBehaviour
 	private float xScale;
 	private float baseY;
 	private float xStore;
-	private GameObject Enemy;
 	private GameObject Player;
 
 	// Start is called before the first frame update
@@ -31,23 +29,20 @@ public class EnemyAI : MonoBehaviour
 		xScale = transform.localScale.x;
 		baseY = myTransform.position.y;
 
-		Enemy = GameObject.FindGameObjectWithTag("Enemy");
 		Player = GameObject.FindGameObjectWithTag("Player");
-
 	}
 
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		Range = Vector2.Distance(Enemy.transform.position, Player.transform.position);
+		float Range = Vector2.Distance(myTransform.position, Player.transform.position);
 		if(Range <= detectRange){
 			EnemyTracking();
-			bob();
 		} else
 		{
-			move();	
+			move();
 		}
-		
+		bob();
 		localTime++;
 	}
 
@@ -64,12 +59,7 @@ public class EnemyAI : MonoBehaviour
 	void bob()
 	{
 		float newY = Mathf.Sin(localTime / 4);
-		bool Up  = (Random.value > 0.5f);
-		if(Up){
-		myTransform.position = new Vector3(myTransform.position.x, myTransform.position.y + newY/15, myTransform.position.z);
-		} else {
-		myTransform.position = new Vector3(myTransform.position.x, myTransform.position.y - newY/15, myTransform.position.z);
-		}
+		myTransform.position = new Vector3(myTransform.position.x, myTransform.position.y + newY / 15, myTransform.position.z);
 	}
 
 	void turn()
@@ -90,6 +80,7 @@ public class EnemyAI : MonoBehaviour
 	}
 
 	void EnemyTracking() {
+		/*
 			Vector2 velocity = new Vector2((transform.position.x - Player.transform.position.x) * speed, (transform.position.y - Player.transform.position.y)* speed);
 			GetComponent<Rigidbody2D>().velocity = -velocity;
 			xStore = Mathf.Abs(myTransform.localScale.x);
@@ -98,5 +89,13 @@ public class EnemyAI : MonoBehaviour
 			} else if (Player.transform.position.x < transform.position.x){
 				myRigidbody.transform.localScale = new Vector3(-xStore, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
 			}
-    }
+			*/
+
+		Vector2 playerDirection = new Vector2(Player.transform.position.x - myTransform.position.x, Player.transform.position.y - myTransform.position.y).normalized;
+		Debug.Log(playerDirection.x + " " +  playerDirection.y);
+	
+	
+	}
+
+
 }

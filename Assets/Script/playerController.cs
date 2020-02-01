@@ -115,7 +115,7 @@ public class playerController : MonoBehaviour
         if (collision.tag == "Enemy")
         {
             deathAnimation();
-            session.takeLives(1);
+            FindObjectOfType<GameSession>().takeLives(1);
             Debug.Log("Hit");
         }
     }
