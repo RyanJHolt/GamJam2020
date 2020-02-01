@@ -16,7 +16,6 @@ public class playerController : MonoBehaviour
     Rigidbody2D myRigidbody;
     private Vector3 rbScale;
     BoxCollider2D myBoxCollider;
-    [SerializeField] GameObject myLightWrapper;
     GameSession session;
 
     public float horizontalDirection = 0f;
@@ -77,12 +76,10 @@ public class playerController : MonoBehaviour
         if (!movingLeft)
         {
             myRigidbody.transform.localScale = rbScale;
-            myLightWrapper.transform.localEulerAngles = new Vector3(0, 0, 0);
         }
         else
         {
             myRigidbody.transform.localScale = Vector3.Scale(rbScale, new Vector3(1, -1, 1));
-            myLightWrapper.transform.localEulerAngles = new Vector3(0, 0, 180);
         }
     }
 

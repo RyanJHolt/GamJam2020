@@ -80,15 +80,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-  m_GameObject: {fileID: 2380779472419037607}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18545425, y: 0.07513986, z: 139}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7728097399144066845}
-  m_Father: {fileID: 5131948327196748049}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7728097399144066846
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,11 +104,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7728097399144066846}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7375132, w: 0.67533284}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.020434, y: 1.5605587, z: 2.0240355}
+  m_LocalRotation: {x: -0, y: -0, z: -0.73751384, w: 0.6753321}
+  m_LocalPosition: {x: 0.18545425, y: 0.07513986, z: 139}
+  m_LocalScale: {x: 2.0204308, y: 1.5605559, z: 2.024035}
   m_Children: []
-  m_Father: {fileID: 5676845992769028396}
+  m_Father: {fileID: 5131948327196748049}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -95.04}
 --- !u!114 &7728097399144066844
@@ -208,7 +199,6 @@ MonoBehaviour:
   dashSpeed: 10
   dashRefreshTime: 2
   hitPunch: {x: 5, y: 5}
-  myLightWrapper: {fileID: 2380779472419037607}
   horizontalDirection: 0
   verticalDirection: 0
   angle: 0
@@ -307,12 +297,12 @@ PrefabInstance:
     - target: {fileID: 3811214205690409778, guid: 0d383015bc4bb3d4db6165707776661f,
         type: 3}
       propertyPath: m_LinearDrag
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3811214205690409778, guid: 0d383015bc4bb3d4db6165707776661f,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4930270460343502472, guid: 0d383015bc4bb3d4db6165707776661f,
         type: 3}
