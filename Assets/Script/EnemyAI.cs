@@ -15,7 +15,9 @@ public class EnemyAI : MonoBehaviour
 	private float xScale;
 	private float baseY;
 	private float xStore;
+	bool dead = false;
 	private GameObject Player;
+	[SerializeField] GameObject bubble;
 
 	// Start is called before the first frame update
 	void Start()
@@ -35,6 +37,7 @@ public class EnemyAI : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
+		if(dead){return;}
 		float Range = Vector2.Distance(myTransform.position, Player.transform.position);
 		if(Range <= detectRange){
 			EnemyTracking();
@@ -80,22 +83,25 @@ public class EnemyAI : MonoBehaviour
 	}
 
 	void EnemyTracking() {
-		/*
-			Vector2 velocity = new Vector2((transform.position.x - Player.transform.position.x) * speed, (transform.position.y - Player.transform.position.y)* speed);
-			GetComponent<Rigidbody2D>().velocity = -velocity;
-			xStore = Mathf.Abs(myTransform.localScale.x);
-			if(Player.transform.position.x > transform.position.x){
-				myRigidbody.transform.localScale = new Vector3(xStore, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
-			} else if (Player.transform.position.x < transform.position.x){
-				myRigidbody.transform.localScale = new Vector3(-xStore, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
-			}
-			*/
-
 		Vector2 playerDirection = new Vector2(Player.transform.position.x - myTransform.position.x, Player.transform.position.y - myTransform.position.y).normalized;
 		Debug.Log(playerDirection.x + " " +  playerDirection.y);
-	
-	
 	}
+	
+	 private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Bullet")
+        {
+			Debug.Log("test");
+			dead = true;
+            deathAnimation();
+            Instantiate (bubble, gameObject.transform.position, gameObject.transform.rotation);
+        }
+    }
 
+	void deathAnimation()
+    {
+        myRigidbody.velocity = new Vector2(0,2);
+        myRigidbody.transform.localScale = new Vector3(myRigidbody.transform.localScale.x,- myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+    }
 
 }
