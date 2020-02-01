@@ -22,8 +22,8 @@ public class straw : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            GameObject.Destroy(gameObject);
             session.addPlastic(1);
+            GameObject.Destroy(gameObject);
         }
     }
 }
