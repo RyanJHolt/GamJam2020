@@ -49,6 +49,9 @@ TagManager:
   - name: Middleground
     uniqueID: 3853610575
     locked: 0
+  - name: Black
+    uniqueID: 813332361
+    locked: 0
   - name: Foreground
     uniqueID: 3923999283
     locked: 0
