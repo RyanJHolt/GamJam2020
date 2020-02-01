@@ -196,12 +196,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   turnSpeed: 1
-  dashSpeed: 10
+  dashMultiplier: 3
+  dashDuration: 0.2
   dashRefreshTime: 2
   hitPunch: {x: 5, y: 5}
+  myLightWrapper: {fileID: 7728097399144066846}
+  hMovement: 0
+  vMovement: 0
   horizontalDirection: 0
   verticalDirection: 0
   angle: 0
+  canDash: 1
+  dashing: 0
 --- !u!1001 &7728097399669009101
 PrefabInstance:
   m_ObjectHideFlags: 0
