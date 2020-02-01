@@ -31,6 +31,11 @@ public class Bubbles : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+        {
+            Destroy (gameObject);
+        }
+
     IEnumerator Despawn(){
         yield return new WaitForSeconds(despawnTime);
         Destroy (gameObject);

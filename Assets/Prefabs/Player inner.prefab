@@ -160,6 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7750546668681843711}
+  - component: {fileID: 3011710660860830197}
   - component: {fileID: 4690236997300824562}
   m_Layer: 0
   m_Name: BubbleGun
@@ -182,6 +183,22 @@ Transform:
   m_Father: {fileID: 3172751251072664540}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3011710660860830197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004289225045277806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f3ef3623455e724ca8b06b4227cc551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubbleBullet: {fileID: 4392577178037492164, guid: 6d75598be7630874fb30ea4b234742b9,
+    type: 3}
+  reload: 1
+  reloaded: 0
 --- !u!212 &4690236997300824562
 SpriteRenderer:
   m_ObjectHideFlags: 0
