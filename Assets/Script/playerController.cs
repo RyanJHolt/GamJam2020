@@ -13,10 +13,13 @@ public class playerController : MonoBehaviour
 
     Rigidbody2D myRigidbody;
     Transform myTransform;
+    GameSession session;
+    BoxCollider2D myBoxCollider;
 
     float horizontalDirection = 0f;
     float verticalDirection = 0f;
     bool dashing = false;
+    bool allowMovement = true;
 
     private float xScale;
 
@@ -25,6 +28,8 @@ public class playerController : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myTransform = GetComponent<Transform>();
+        session = GetComponent<GameSession>();
+        myBoxCollider = GetComponent<BoxCollider2D>();
 
         xScale = myRigidbody.transform.localScale.x;
     }
@@ -39,6 +44,8 @@ public class playerController : MonoBehaviour
     }
 
     void movement() {
+        if (!allowMovement)
+            return;
 
         horizontalDirection = Mathf.Sign(myRigidbody.velocity.x);
         verticalDirection = Mathf.Sign(myRigidbody.velocity.y);
@@ -94,12 +101,19 @@ public class playerController : MonoBehaviour
         dashing = false;
     }
 
+    void deathAnimation()
+    {
+        myBoxCollider.isTrigger = true;
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Enemy")
        {
-            myRigidbody.velocity =  hitPunch;
-            //Debug.Log("Hit");
+            deathAnimation();
+            session.takeLives(1);
+            Debug.Log("Hit");
         }
     }
 }
