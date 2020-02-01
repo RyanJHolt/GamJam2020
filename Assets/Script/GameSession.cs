@@ -27,18 +27,14 @@ public class GameSession : MonoBehaviour
         this.playerLives = playerLives;
     }
 
-    public int getPlastic()
+    public void addPlastic(int num)
     {
-        return plastic;
+        plastic += num;
+        Debug.Log(plastic);
     }
 
-    public void setPlastic(int plastic)
+    public void takePlastic(int num)
     {
-        this.plastic = plastic;
+        plastic -= num;
     }
-
-
-
-
-
 }

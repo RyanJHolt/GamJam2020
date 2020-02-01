@@ -16,7 +16,6 @@ public class EnemyAI : MonoBehaviour
 	private float xScale;
 	private float baseY;
 	private float xStore;
-
 	private GameObject Enemy;
 	private GameObject Player;
 
@@ -43,10 +42,10 @@ public class EnemyAI : MonoBehaviour
 		Range = Vector2.Distance(Enemy.transform.position, Player.transform.position);
 		if(Range <= detectRange){
 			EnemyTracking();
+			bob();
 		} else
 		{
 			move();	
-			bob();
 		}
 		
 		localTime++;
@@ -65,7 +64,12 @@ public class EnemyAI : MonoBehaviour
 	void bob()
 	{
 		float newY = Mathf.Sin(localTime / 4);
-		myTransform.position = new Vector3(myTransform.position.x, baseY + newY / 15, myTransform.position.z);
+		bool Up  = (Random.value > 0.5f);
+		if(Up){
+		myTransform.position = new Vector3(myTransform.position.x, myTransform.position.y + newY/15, myTransform.position.z);
+		} else {
+		myTransform.position = new Vector3(myTransform.position.x, myTransform.position.y - newY/15, myTransform.position.z);
+		}
 	}
 
 	void turn()
@@ -88,9 +92,11 @@ public class EnemyAI : MonoBehaviour
 	void EnemyTracking() {
 			Vector2 velocity = new Vector2((transform.position.x - Player.transform.position.x) * speed, (transform.position.y - Player.transform.position.y)* speed);
 			GetComponent<Rigidbody2D>().velocity = -velocity;
-			xStore = ((myTransform.localScale.x * myTransform.localScale.x)/myTransform.localScale.x);
-			if(Player.transform.position.x/transform.position.x > 0){
-			myRigidbody.transform.localScale = new Vector3(xStore * -1, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+			xStore = Mathf.Abs(myTransform.localScale.x);
+			if(Player.transform.position.x > transform.position.x){
+				myRigidbody.transform.localScale = new Vector3(xStore, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+			} else if (Player.transform.position.x < transform.position.x){
+				myRigidbody.transform.localScale = new Vector3(-xStore, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
 			}
     }
 }
