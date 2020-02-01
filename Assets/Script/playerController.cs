@@ -11,7 +11,7 @@ public class playerController : MonoBehaviour
     [SerializeField] int dashRefreshTime = 2;
     [SerializeField] Vector2 hitPunch = new Vector2(5f, 5f);
 
-    public Rigidbody2D myRigidbody;
+    Rigidbody2D myRigidbody;
     Transform myTransform;
     GameSession session;
     BoxCollider2D myBoxCollider;
@@ -43,8 +43,7 @@ public class playerController : MonoBehaviour
         spriteRotation();
     }
 
-    void movement()
-    {
+    void movement() {
         if (!allowMovement)
             return;
 
@@ -54,16 +53,15 @@ public class playerController : MonoBehaviour
         float hMovement = Input.GetAxisRaw("Horizontal");
         float vMovement = Input.GetAxisRaw("Vertical");
 
-        myRigidbody.velocity = myRigidbody.velocity + new Vector2(hMovement * horizontalSpeed, vMovement * verticalSpeed).normalized;
+        myRigidbody.velocity = myRigidbody.velocity + new Vector2(hMovement * horizontalSpeed, vMovement * verticalSpeed);
     }
 
     void spriteFLip()
     {
-        if (horizontalDirection == 1)
+        if(horizontalDirection == 1)
         {
             myRigidbody.transform.localScale = new Vector3(xScale, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
-        }
-        else
+        } else
         {
             myRigidbody.transform.localScale = new Vector3(-xScale, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
         }
@@ -83,8 +81,7 @@ public class playerController : MonoBehaviour
             {
                 transform.localEulerAngles = new Vector3(0, 0, 45 * -verticalDirection);
             }
-        }
-        else
+        } else
         {
             transform.localEulerAngles = new Vector3(0, 0, 0);
         }
@@ -92,16 +89,14 @@ public class playerController : MonoBehaviour
 
     void dash()
     {
-        if (Input.GetAxisRaw("Jump") > 0 && !dashing)
-        {
+        if (Input.GetAxisRaw("Jump") > 0 && !dashing) {
             myRigidbody.velocity = myRigidbody.velocity + new Vector2(dashSpeed * horizontalDirection, myRigidbody.velocity.y);
             dashing = true;
             StartCoroutine(resetDash());
         }
     }
 
-    IEnumerator resetDash()
-    {
+    IEnumerator resetDash() {
         yield return new WaitForSeconds(dashRefreshTime);
         dashing = false;
     }
@@ -114,8 +109,8 @@ public class playerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
-        {
+        if(collision.tag == "Enemy")
+       {
             deathAnimation();
             session.takeLives(1);
             Debug.Log("Hit");

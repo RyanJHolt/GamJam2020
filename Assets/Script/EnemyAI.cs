@@ -42,17 +42,18 @@ public class EnemyAI : MonoBehaviour
 		Range = Vector2.Distance(Enemy.transform.position, Player.transform.position);
 		if(Range <= detectRange){
 			EnemyTracking();
-			
-		} else{
 			bob();
+		} else
+		{
 			move();	
 		}
+		
 		localTime++;
 	}
 
 	void move()
 	{
-		Vector2 newVelocity = new Vector2(speed * direction, 0);
+		Vector2 newVelocity = new Vector2(speed * direction, myRigidbody.velocity.y);
 		myRigidbody.velocity = newVelocity;
 		if (localTime >= turnTime)
 		{
@@ -78,12 +79,9 @@ public class EnemyAI : MonoBehaviour
 		localTime = 0;
 	}
 
-	void spriteFlip(){
-		if (myRigidbody.velocity.x > 0){
-			myRigidbody.transform.localScale = new Vector3(- Mathf.Abs(myTransform.localScale.x) , myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
-		} else {
-			myRigidbody.transform.localScale = new Vector3(Mathf.Abs(myTransform.localScale.x), myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
-		}
+	void spriteFlip()
+	{
+		myRigidbody.transform.localScale = new Vector3(myTransform.localScale.x  * -1, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
 	}
 
 	void startFlip()
