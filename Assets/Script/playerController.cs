@@ -13,7 +13,6 @@ public class playerController : MonoBehaviour
 
     Rigidbody2D myRigidbody;
     Transform myTransform;
-    GameSession session;
     BoxCollider2D myBoxCollider;
 
     float horizontalDirection = 0f;
@@ -28,7 +27,6 @@ public class playerController : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myTransform = GetComponent<Transform>();
-        session = GetComponent<GameSession>();
         myBoxCollider = GetComponent<BoxCollider2D>();
 
         xScale = myRigidbody.transform.localScale.x;
@@ -112,7 +110,7 @@ public class playerController : MonoBehaviour
         if(collision.tag == "Enemy")
        {
             deathAnimation();
-            session.takeLives(1);
+            FindObjectOfType<GameSession>().takeLives(1);
             Debug.Log("Hit");
         }
     }
