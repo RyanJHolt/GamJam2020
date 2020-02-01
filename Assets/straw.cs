@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class plastic : MonoBehaviour
+public class straw : MonoBehaviour
 {
+
     GameSession session;
     // Start is called before the first frame update
     void Start()
@@ -14,7 +15,7 @@ public class plastic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,7 +23,7 @@ public class plastic : MonoBehaviour
         if (collision.tag == "Player")
         {
             GameObject.Destroy(gameObject);
-            session.addPlastic(3);
+            session.addPlastic(1);
         }
     }
 }
