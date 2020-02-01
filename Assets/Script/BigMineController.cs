@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BigMineController : MonoBehaviour {
 
-    [SerializeField] bool exploded = false;
 	public GameObject explosion;
 
 	// Use this for initialization
@@ -22,7 +21,6 @@ public class BigMineController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.tag == "Player"){	
 			Destroy (gameObject);
-            exploded = true;
 			Instantiate (explosion, gameObject.transform.position, gameObject.transform.rotation);
 		}	
 	}
