@@ -1,37 +1,40 @@
-﻿using System.Collections;
+﻿// using System.Threading.Tasks.Dataflow;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
 
-    [SerializeField] float horizontalSpeed = 5f;
-    [SerializeField] float verticalSpeed = 5f;
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float turnSpeed = 5f;
     [SerializeField] float dashSpeed = 5f;
     [SerializeField] int dashRefreshTime = 2;
     [SerializeField] Vector2 hitPunch = new Vector2(5f, 5f);
 
     Rigidbody2D myRigidbody;
-    Transform myTransform;
-    GameSession session;
+    private Vector3 rbScale;
     BoxCollider2D myBoxCollider;
+    GameSession session;
 
-    float horizontalDirection = 0f;
-    float verticalDirection = 0f;
+    public float horizontalDirection = 0f;
+    public float verticalDirection = 0f;
+    public float angle = 0f;
     bool dashing = false;
     bool allowMovement = true;
 
-    private float xScale;
+    private bool movingLeft = false;
+
+    private float angleDelta = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
-        myTransform = GetComponent<Transform>();
+        myRigidbody = GetComponentInChildren<Rigidbody2D>();
+        rbScale = myRigidbody.transform.localScale;
         session = GetComponent<GameSession>();
-        myBoxCollider = GetComponent<BoxCollider2D>();
-
-        xScale = myRigidbody.transform.localScale.x;
+        myBoxCollider = GetComponentInChildren<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -39,7 +42,7 @@ public class playerController : MonoBehaviour
     {
         movement();
         dash();
-        spriteFLip();
+        spriteFlip();
         spriteRotation();
     }
 
@@ -48,46 +51,41 @@ public class playerController : MonoBehaviour
         if (!allowMovement)
             return;
 
-        horizontalDirection = Mathf.Sign(myRigidbody.velocity.x);
-        verticalDirection = Mathf.Sign(myRigidbody.velocity.y);
-
         float hMovement = Input.GetAxisRaw("Horizontal");
         float vMovement = Input.GetAxisRaw("Vertical");
 
-        myRigidbody.velocity = myRigidbody.velocity + new Vector2(hMovement * horizontalSpeed, vMovement * verticalSpeed).normalized;
+        horizontalDirection = hMovement == 0 ? 0 : Mathf.Sign(hMovement);
+        verticalDirection = vMovement == 0 ? 0 : Mathf.Sign(vMovement);
+
+        Vector2 direction = new Vector2(hMovement, vMovement).normalized * moveSpeed / Time.deltaTime;
+        if (hMovement != 0 || vMovement != 0)
+        {
+            angle = Mathf.SmoothDampAngle(
+                angle,
+                Mathf.Atan2(verticalDirection, horizontalDirection) * Mathf.Rad2Deg,
+                ref angleDelta, 1 / (5 * turnSpeed)
+            ) % 360;
+        }
+        movingLeft = (angle < -90 || angle > 90);
+
+        myRigidbody.AddForce(direction);
     }
 
-    void spriteFLip()
+    void spriteFlip()
     {
-        if (horizontalDirection == 1)
+        if (!movingLeft)
         {
-            myRigidbody.transform.localScale = new Vector3(xScale, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+            myRigidbody.transform.localScale = rbScale;
         }
         else
         {
-            myRigidbody.transform.localScale = new Vector3(-xScale, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+            myRigidbody.transform.localScale = Vector3.Scale(rbScale, new Vector3(1, -1, 1));
         }
     }
 
     void spriteRotation()
     {
-        bool isMovingEnough = Mathf.Abs(myRigidbody.velocity.y) > 0.2;
-
-        if (isMovingEnough)
-        {
-            if (horizontalDirection == 1)
-            {
-                transform.localEulerAngles = new Vector3(0, 0, 45 * verticalDirection);
-            }
-            else
-            {
-                transform.localEulerAngles = new Vector3(0, 0, 45 * -verticalDirection);
-            }
-        }
-        else
-        {
-            transform.localEulerAngles = new Vector3(0, 0, 0);
-        }
+        myRigidbody.transform.localEulerAngles = new Vector3(0, 0, angle);
     }
 
     void dash()
