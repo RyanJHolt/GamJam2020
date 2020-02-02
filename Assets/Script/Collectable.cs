@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class barrell : MonoBehaviour
+public class Collectable : MonoBehaviour
 {
-
     GameSession session;
+    [SerializeField] public int score = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,15 +16,15 @@ public class barrell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            session.addPlastic(6);
             GameObject.Destroy(gameObject);
+            session.addPlastic(score);
         }
     }
 }

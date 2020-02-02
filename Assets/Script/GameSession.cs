@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSession : MonoBehaviour {
+public class GameSession : MonoBehaviour
+{
     //TODO: In Start(), get number of plastic pieces in level, assign to maxPlastic
     [SerializeField] int plastic = 0;
     private int maxPlastic = 10;
@@ -10,41 +11,50 @@ public class GameSession : MonoBehaviour {
 
     private LightLevel lightLevel;
 
-    void Awake() {
+    void Awake()
+    {
 
     }
 
-    private void Start() {
+    private void Start()
+    {
         lightLevel = FindObjectOfType<LightLevel>();
         maxPlastic = 0;
-        foreach (plastic p in FindObjectsOfType<plastic>()) {
+        foreach (Collectable p in FindObjectsOfType<Collectable>())
+        {
             maxPlastic += p.score;
         }
     }
 
-    public void addLives(int num) {
+    public void addLives(int num)
+    {
         playerLives += num;
     }
 
-    public void takeLives(int num) {
+    public void takeLives(int num)
+    {
         playerLives -= num;
         Debug.Log(playerLives);
     }
 
-    public int getPlayerLives() {
+    public int getPlayerLives()
+    {
         return playerLives;
     }
 
-    public void addPlastic(int num) {
+    public void addPlastic(int num)
+    {
         plastic += num;
-        lightLevel.DimLights(num / (float) maxPlastic);
+        lightLevel.DimLights(num / (float)maxPlastic);
     }
 
-    public void takePlastic(int num) {
+    public void takePlastic(int num)
+    {
         plastic -= num;
     }
 
-    public int getPlastic() {
+    public int getPlastic()
+    {
         return plastic;
     }
 }

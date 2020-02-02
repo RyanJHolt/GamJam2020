@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1653323208728736618}
   - component: {fileID: 1653323208728736619}
-  - component: {fileID: 1653323208728736612}
   - component: {fileID: 1653323207353306293}
+  - component: {fileID: -4235733012756851101}
   m_Layer: 0
   m_Name: Straw
   m_TagString: Untagged
@@ -82,18 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1653323208728736612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653323208728736613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 460004e9a07f3a842aa25940d670641c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1653323207353306293
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,3 +108,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.0805625, y: 0.2525528}
   m_EdgeRadius: 0
+--- !u!114 &-4235733012756851101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653323208728736613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2934e970fc64e148900eff81f1e8d9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 1
