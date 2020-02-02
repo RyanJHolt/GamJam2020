@@ -5,19 +5,26 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
+    [SerializeField] Vector2 hitPunch = new Vector2(5f, 5f);
 
+    [Header("Movement")]
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float turnSpeed = 5f;
-    [SerializeField] float dashMultiplier = 3f, dashDuration = 0.2f, dashRefreshTime = 2f;
-    [SerializeField] Vector2 hitPunch = new Vector2(5f, 5f);
+
+    [Header("Dash")]
+    [SerializeField] float dashMultiplier = 3f;
+    [SerializeField] float dashDuration = 0.2f;
+    [SerializeField] float dashRefreshTime = 2f;
+    [SerializeField] AudioClip dashSfx;
+
     Rigidbody2D myRigidbody;
     private Vector3 rbScale;
     BoxCollider2D myBoxCollider;
+    [Header("Do not change")]
     [SerializeField] GameObject myLightWrapper;
     GameSession session;
 
     AudioSource audioSource;
-    [SerializeField] AudioClip dashSfx;
 
     public float hMovement = 0f, vMovement = 0f;
     public float horizontalDirection = 1f, verticalDirection = 0f;

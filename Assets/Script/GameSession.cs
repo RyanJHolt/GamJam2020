@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameSession : MonoBehaviour
 {
-    //TODO: In Start(), get number of plastic pieces in level, assign to maxPlastic
+
+    [Header("Starting values")]
     [SerializeField] int plastic = 0;
-    private int maxPlastic = 10;
     [SerializeField] int playerLives = 5;
+
+    [Header("Index number in File/Build Settings; if excluded, will use next in order")]
+    [SerializeField] Scene nextScene;
+
+    private int maxPlastic = 10;
 
     private LightLevel lightLevel;
 
@@ -46,6 +52,17 @@ public class GameSession : MonoBehaviour
     {
         plastic += num;
         lightLevel.DimLights(num / (float)maxPlastic);
+        if (plastic >= maxPlastic)
+        {
+            if (nextScene != null)
+            {
+                SceneManager.LoadScene(nextScene.name);
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+        }
     }
 
     public void takePlastic(int num)
@@ -56,5 +73,9 @@ public class GameSession : MonoBehaviour
     public int getPlastic()
     {
         return plastic;
+    }
+    public int getPlasticRemaining()
+    {
+        return maxPlastic - plastic;
     }
 }
