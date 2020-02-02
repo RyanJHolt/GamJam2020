@@ -26,6 +26,6 @@ public class MineController : MonoBehaviour {
 	IEnumerator killSelf()
 	{
 		yield return new WaitForSeconds(1);
-		GameObject.Destroy(gameObject);
+		Destroy(gameObject);
 	}
 }
