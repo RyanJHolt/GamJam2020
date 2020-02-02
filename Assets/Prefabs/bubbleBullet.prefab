@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1091596830786604500}
   - component: {fileID: -5611455282577546370}
   - component: {fileID: 7663904394615768288}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bubbleBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2dbf8210c3db04caf34f37a7b7c35f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 11
 --- !u!50 &1091596830786604500
 Rigidbody2D:
   serializedVersion: 4
