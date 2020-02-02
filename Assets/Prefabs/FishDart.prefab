@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3627513854442802006}
   - component: {fileID: 3627513854442802007}
   - component: {fileID: 3627513854442802004}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FishDart
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -119,8 +119,8 @@ MonoBehaviour:
   direction: -1
   speed: 3
   detectRange: 10
-  Range: 0
   turnTime: 82
+  bubble: {fileID: 0}
 --- !u!61 &3627513854442802004
 BoxCollider2D:
   m_ObjectHideFlags: 0
