@@ -2530,6 +2530,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7728097399212435844, guid: f7ff0040095ca6e23b575589521b614a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7728097399212435845, guid: f7ff0040095ca6e23b575589521b614a,
         type: 3}
       propertyPath: m_Name
@@ -2538,7 +2543,7 @@ PrefabInstance:
     - target: {fileID: 7728097399212435845, guid: f7ff0040095ca6e23b575589521b614a,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: PlayerCon
       objectReference: {fileID: 0}
     - target: {fileID: 7728097399212435899, guid: f7ff0040095ca6e23b575589521b614a,
         type: 3}
@@ -16993,6 +16998,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1296011802 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4880819733796322920, guid: f7ff0040095ca6e23b575589521b614a,
+    type: 3}
+  m_PrefabInstance: {fileID: 229550697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1296011806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296011802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a819d7e7496ef48897e11a14ded541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  turnSpeed: 5
+  dashMultiplier: 3
+  dashDuration: 0.2
+  dashRefreshTime: 2
+  hitPunch: {x: 5, y: 5}
+  myLightWrapper: {fileID: 0}
+  hMovement: 0
+  vMovement: 0
+  horizontalDirection: 1
+  verticalDirection: 0
+  angle: 0
+  canDash: 1
+  dashing: 0
 --- !u!1001 &1304698036
 PrefabInstance:
   m_ObjectHideFlags: 0

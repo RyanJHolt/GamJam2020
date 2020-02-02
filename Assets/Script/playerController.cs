@@ -9,7 +9,6 @@ public class playerController : MonoBehaviour {
     [SerializeField] float turnSpeed = 5f;
     [SerializeField] float dashMultiplier = 3f, dashDuration = 0.2f, dashRefreshTime = 2f;
     [SerializeField] Vector2 hitPunch = new Vector2(5f, 5f);
-
     Rigidbody2D myRigidbody;
     private Vector3 rbScale;
     BoxCollider2D myBoxCollider;
@@ -21,6 +20,7 @@ public class playerController : MonoBehaviour {
     public float angle = 0f;
     public bool canDash = true, dashing = false;
     bool allowMovement = true;
+    bool dead = false;
 
     private bool movingLeft = false;
 
@@ -38,6 +38,10 @@ public class playerController : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
+        if (dead)
+        {
+            return;
+        }
         movement();
         dash();
         spriteFlip();
@@ -114,21 +118,18 @@ public class playerController : MonoBehaviour {
         IEnumerator Respawn(){
         yield return new WaitForSeconds(3);
         myRigidbody.transform.position = spawnPoint;
+        dead = false;
         }
 
         deathAnimation();
         FindObjectOfType<GameSession>().takeLives(1);
         if (FindObjectOfType<GameSession>().getPlayerLives() != 0){
+            dead = true;
             StartCoroutine(Respawn());
         }
         Debug.Log("Hit");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag == "Enemy") {
-            hurt();
-        }
-    }
 
     
 }
