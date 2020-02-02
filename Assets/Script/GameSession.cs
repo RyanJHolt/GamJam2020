@@ -10,8 +10,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] int plastic = 0;
     [SerializeField] int playerLives = 5;
 
-    [Header("Index number in File/Build Settings; if excluded, will use next in order")]
-    [SerializeField] Scene nextScene;
+    // [Header("Index number in File/Build Settings; if excluded, will use next in order")]
+    int? nextScene;
 
     private int maxPlastic = 10;
 
@@ -54,13 +54,13 @@ public class GameSession : MonoBehaviour
         lightLevel.DimLights(num / (float)maxPlastic);
         if (plastic >= maxPlastic)
         {
-            if (nextScene != null)
+            if (nextScene == null)
             {
-                SceneManager.LoadScene(nextScene.name);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                SceneManager.LoadScene((int)nextScene);
             }
         }
     }
