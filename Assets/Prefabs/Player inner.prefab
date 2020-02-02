@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2022326416247057948}
   m_Layer: 0
   m_Name: Player inner
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,12 +98,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   turnSpeed: 5
-  dashSpeed: 10
+  dashMultiplier: 3
+  dashDuration: 0.2
   dashRefreshTime: 2
   hitPunch: {x: 5, y: 5}
+  myLightWrapper: {fileID: 0}
+  hMovement: 0
+  vMovement: 0
   horizontalDirection: 0
   verticalDirection: 0
   angle: 0
+  canDash: 1
+  dashing: 0
 --- !u!50 &3811214205690409778
 Rigidbody2D:
   serializedVersion: 4

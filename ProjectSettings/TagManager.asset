@@ -18,9 +18,9 @@ TagManager:
   - 
   - MidGround
   - Background
-  - 
-  - 
-  - 
+  - Enemy
+  - Bullets
+  - Player
   - 
   - 
   - 
