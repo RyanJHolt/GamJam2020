@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameSession : MonoBehaviour {
     //TODO: In Start(), get number of plastic pieces in level, assign to maxPlastic
-    [SerializeField] int plastic = 0, maxPlastic = 10;
+    [SerializeField] int plastic = 0;
+    private int maxPlastic = 10;
     [SerializeField] int playerLives = 5;
 
     private LightLevel lightLevel;
@@ -15,6 +16,10 @@ public class GameSession : MonoBehaviour {
 
     private void Start() {
         lightLevel = FindObjectOfType<LightLevel>();
+        maxPlastic = 0;
+        foreach (plastic p in FindObjectsOfType<plastic>()) {
+            maxPlastic += p.score;
+        }
     }
 
     public void addLives(int num) {
