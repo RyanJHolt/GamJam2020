@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class MineController : MonoBehaviour {
 
-	public GameObject explosion;
+	public GameObject explosionAnim;
+    public AudioSource AudioData;
+    private AudioClip explosionSoundFile;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        AudioData = GetComponent<AudioSource>();
+        explosionSoundFile = AudioData.clip;
 	}
 
-
-
-	void OnTriggerEnter2D(Collider2D other){
-		if(other.tag == "Player"){	
-			Destroy (gameObject);
-			Instantiate (explosion, gameObject.transform.position, gameObject.transform.rotation);
+	void OnTriggerEnter2D(Collider2D other) {
+		if(other.tag == "Player"){
+            AudioData.PlayOneShot(explosionSoundFile, 1.0f);
+			Destroy(gameObject);
+			Instantiate(explosionAnim, transform.position, Quaternion.identity);
+			killSelf();
 		}	
+	}
+
+	IEnumerator killSelf()
+	{
+		yield return new WaitForSeconds(1);
+		Destroy(gameObject);
 	}
 }
