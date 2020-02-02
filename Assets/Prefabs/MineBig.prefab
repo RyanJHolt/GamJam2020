@@ -110,7 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79277b796094486ab3b3e03267a6d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 1991411825818374, guid: 93d9044f70fa94301b9f491903e8e410, type: 3}
+  explosionAnim: {fileID: 4859826509616893591, guid: 37229bed6aefa4646bcb6b4c06b7b6ae,
+    type: 3}
+  AudioData: {fileID: 0}
 --- !u!58 &518908022646149256
 CircleCollider2D:
   m_ObjectHideFlags: 0
