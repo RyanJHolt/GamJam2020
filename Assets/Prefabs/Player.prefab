@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 49766654736496946}
   - component: {fileID: 4824491272951155512}
   - component: {fileID: 3037860541418079039}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BubbleGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,8 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleBullet: {fileID: 4392577178037492164, guid: 6d75598be7630874fb30ea4b234742b9,
     type: 3}
-  reload: 1
-  reloaded: 0
+  reloadTime: 1
 --- !u!212 &3037860541418079039
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -85,7 +84,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -370968013
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 09202902e90c87044ba518498432f53d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -141,6 +140,7 @@ GameObject:
   - component: {fileID: 6907273347260570111}
   - component: {fileID: 8588092407054025937}
   - component: {fileID: 2048581489371723971}
+  - component: {fileID: 7745163205677406857}
   m_Layer: 12
   m_Name: Sprite + Physics
   m_TagString: Player
@@ -272,6 +272,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12aa7a5982c55204bbd70faa764ff1d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7745163205677406857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880819733796322920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.497
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.2
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 4f6eb1e5
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 3
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &7728097399144066846
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,14 +426,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a819d7e7496ef48897e11a14ded541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPunch: {x: 5, y: 5}
   moveSpeed: 1
   turnSpeed: 1
   dashMultiplier: 3
   dashDuration: 0.2
   dashRefreshTime: 2
-  hitPunch: {x: 5, y: 5}
-  myLightWrapper: {fileID: 2866951696850291984}
   dashSfx: {fileID: 8300000, guid: 383b120cc1d83ba409acf990369d2e90, type: 3}
+  myLightWrapper: {fileID: 2866951696850291984}
   hMovement: 0
   vMovement: 0
   horizontalDirection: 0
