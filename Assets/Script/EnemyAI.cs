@@ -102,12 +102,22 @@ public class EnemyAI : MonoBehaviour
 	
 	 private void OnTriggerEnter2D(Collider2D collision)
     {
+		IEnumerator wake(){
+		yield return new WaitForSeconds(3);
+		myRigidbody.WakeUp();
+		}
+
         if (collision.tag == "Bullet")
         {
 			dead = true;
             deathAnimation();
             Instantiate (bubble, gameObject.transform.position, gameObject.transform.rotation);
         }
+		if (collision.tag == "Player")
+		{
+			myRigidbody.Sleep();
+			StartCoroutine(wake());
+		}
     }
 
 	void deathAnimation()

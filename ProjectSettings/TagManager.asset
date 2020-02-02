@@ -8,6 +8,8 @@ TagManager:
   - Mines
   - Bullet
   - PlayerCon
+  - Dash
+  - Die
   layers:
   - Default
   - TransparentFX
