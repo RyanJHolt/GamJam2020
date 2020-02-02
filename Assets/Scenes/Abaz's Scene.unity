@@ -442,8 +442,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8567150990718769142, guid: f7ff0040095ca6e23b575589521b614a,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7ff0040095ca6e23b575589521b614a, type: 3}
+--- !u!1 &1492483528 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7728097399212435845, guid: f7ff0040095ca6e23b575589521b614a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1492483527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!81 &1492483529
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492483528}
+  m_Enabled: 1
 --- !u!1 &1694598595
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +627,21 @@ PrefabInstance:
         type: 3}
       propertyPath: MaxDistance
       value: 2.678524
+      objectReference: {fileID: 0}
+    - target: {fileID: -7771352865998886094, guid: 4d5a5f6aaac64504fb81d707d7d7b308,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7771352865998886094, guid: 4d5a5f6aaac64504fb81d707d7d7b308,
+        type: 3}
+      propertyPath: MinDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7771352865998886094, guid: 4d5a5f6aaac64504fb81d707d7d7b308,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2196445605910964809, guid: 4d5a5f6aaac64504fb81d707d7d7b308,
         type: 3}
