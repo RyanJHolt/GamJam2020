@@ -18796,6 +18796,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7728097399212435844, guid: f7ff0040095ca6e23b575589521b614a,
+        type: 3}
+      propertyPath: dashSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 383b120cc1d83ba409acf990369d2e90, type: 3}
     - target: {fileID: 7728097399212435845, guid: f7ff0040095ca6e23b575589521b614a,
         type: 3}
       propertyPath: m_Name
@@ -18855,6 +18860,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567150990718769142, guid: f7ff0040095ca6e23b575589521b614a,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7ff0040095ca6e23b575589521b614a, type: 3}
