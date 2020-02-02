@@ -5,22 +5,31 @@ using UnityEngine;
 public class Fire : MonoBehaviour
 {
     public GameObject bubbleBullet;
-    public int reload = 1;
-    public bool reloaded;
+    public int reloadTime = 1;
+    bool canFire;
+    playerController controller;
     // Start is called before the first frame update
     void Start()
     {
-        reloaded = true;
+        canFire = true;
+        controller = GetComponentInParent<playerController>();
     }
 
     private void fire()
     {
-        if (reloaded){
-        Instantiate (bubbleBullet, gameObject.transform.position, gameObject.transform.rotation);
-        reloaded = false;
-         StartCoroutine(Reload()); 
-        } 
-        
+        IEnumerator Reload()
+        {
+            yield return new WaitForSeconds(reloadTime);
+            canFire = true;
+        }
+
+        if (canFire)
+        {
+            Instantiate(bubbleBullet, transform.position, transform.rotation);
+            canFire = false;
+            StartCoroutine(Reload());
+        }
+
     }
 
     // Update is called once per frame
@@ -30,10 +39,5 @@ public class Fire : MonoBehaviour
         {
             fire();
         }
-    }
-
-    IEnumerator Reload(){
-        yield return new WaitForSeconds(reload);
-        reloaded = true;
     }
 }
