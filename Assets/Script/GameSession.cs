@@ -32,6 +32,15 @@ public class GameSession : MonoBehaviour
         }
     }
 
+     public void Update()
+ {
+      if (Input.GetKeyDown(KeyCode.R))
+     {
+        SceneManager.LoadScene("Main Menu");
+     }
+ }
+
+
     public void addLives(int num)
     {
         playerLives += num;
@@ -41,6 +50,9 @@ public class GameSession : MonoBehaviour
     {
         playerLives -= num;
         Debug.Log(playerLives);
+        if(getPlayerLives() == 0){
+            SceneManager.LoadScene("Main Menu");
+        }
     }
 
     public int getPlayerLives()
