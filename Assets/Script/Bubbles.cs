@@ -7,7 +7,7 @@ public class Bubbles : MonoBehaviour
 
     Rigidbody2D myRigidbody;
 	Transform myTransform;
-    [SerializeField] float speed = 20f;
+    [SerializeField] float speed = 5f;
     int despawnTime = 10;
 	
     private GameObject Player;
