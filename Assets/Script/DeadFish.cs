@@ -6,11 +6,13 @@ public class DeadFish : MonoBehaviour
 {
     [SerializeField]private float direction = 1;
 	[SerializeField] private float speed = 3f;
-	[SerializeField] private int bobbing;
+	[SerializeField] private int bobHeight;
 	[Range(10, 400)] public int turnTime;
 	Transform myTransform;
     Rigidbody2D myRigidbody;
 	private int localTime;
+	[SerializeField] private int bobStore;
+	[SerializeField] private int bobRate;
 	private float xScale;
 	private float baseY;
 	private float xStore;
@@ -26,6 +28,7 @@ public class DeadFish : MonoBehaviour
 		localTime = 0;
 		xScale = transform.localScale.x;
 		baseY = myTransform.position.y;
+		bobStore = bobRate;
 	}
 
 	// Update is called once per frame
@@ -48,9 +51,16 @@ public class DeadFish : MonoBehaviour
 
 	void bob()
 	{
-		float newY = Mathf.Sin(localTime / bobbing);
-		Vector2 newVelocity = new Vector2((speed * direction)/bobbing, 0f);
+		if (bobRate == 0)
+		{
+			bobRate = bobStore;
+		}
+		if(bobRate == bobStore){
+		float newY = Mathf.Sin(localTime / bobHeight);
+		Vector2 newVelocity = new Vector2((speed * direction), 0f);
 		myTransform.position = new Vector3(myTransform.position.x, myTransform.position.y + newY / 15, myTransform.position.z);
+		}
+		bobRate--;
 	}
 
 	void turn()

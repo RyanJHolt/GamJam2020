@@ -143,5 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 1
-  speed: 0.2
+  speed: 0.5
+  bobHeight: 12
   turnTime: 400
+  bobStore: 5
+  bobRate: 0
