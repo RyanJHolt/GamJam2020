@@ -25,6 +25,7 @@ public class playerController : MonoBehaviour {
     private bool movingLeft = false;
 
     private float angleDelta = 0f;
+    Vector2 spawnPoint;
 
     // Start is called before the first frame update
     void Start() {
@@ -32,6 +33,7 @@ public class playerController : MonoBehaviour {
         rbScale = myRigidbody.transform.localScale;
         session = GetComponent<GameSession>();
         myBoxCollider = GetComponentInChildren<BoxCollider2D>();
+        spawnPoint = new Vector2(myRigidbody.transform.position.x,myRigidbody.transform.position.y);
     }
 
     // Update is called once per frame
@@ -104,15 +106,29 @@ public class playerController : MonoBehaviour {
     }
 
     void deathAnimation() {
-        myBoxCollider.isTrigger = true;
+        myRigidbody.velocity = new Vector2(0,2);
+        myRigidbody.transform.localScale = new Vector3(myRigidbody.transform.localScale.x,- myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+    }
 
+    void hurt(){
+        IEnumerator Respawn(){
+        yield return new WaitForSeconds(3);
+        myRigidbody.transform.position = spawnPoint;
+        }
+
+        deathAnimation();
+        FindObjectOfType<GameSession>().takeLives(1);
+        if (FindObjectOfType<GameSession>().getPlayerLives() != 0){
+            StartCoroutine(Respawn());
+        }
+        Debug.Log("Hit");
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Enemy") {
-            deathAnimation();
-            FindObjectOfType<GameSession>().takeLives(1);
-            Debug.Log("Hit");
+            hurt();
         }
     }
+
+    
 }

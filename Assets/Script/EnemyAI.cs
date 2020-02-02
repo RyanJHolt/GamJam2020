@@ -7,6 +7,8 @@ public class EnemyAI : MonoBehaviour
 	[SerializeField]private float direction = 1;
 	[SerializeField] private float speed = 3f;
 	[SerializeField] private float detectRange = 15f;
+	[SerializeField] private float Range;
+
 
 	[Range(10, 400)] public int turnTime;
 	Rigidbody2D myRigidbody;
@@ -37,8 +39,8 @@ public class EnemyAI : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		if(dead){return;}
-		float Range = Vector2.Distance(myTransform.position, Player.transform.position);
+		if(!dead){
+		Range = Vector2.Distance(myTransform.position, Player.transform.position);
 		if(Range <= detectRange){
 			EnemyTracking();
 		} else
@@ -47,6 +49,7 @@ public class EnemyAI : MonoBehaviour
 		}
 		bob();
 		localTime++;
+		}
 	}
 
 	void move()
@@ -62,6 +65,7 @@ public class EnemyAI : MonoBehaviour
 	void bob()
 	{
 		float newY = Mathf.Sin(localTime / 4);
+		Vector2 newVelocity = new Vector2(speed * direction, 0f);
 		myTransform.position = new Vector3(myTransform.position.x, myTransform.position.y + newY / 15, myTransform.position.z);
 	}
 
@@ -73,8 +77,11 @@ public class EnemyAI : MonoBehaviour
 	}
 
 	void spriteFlip()
-	{
-		myRigidbody.transform.localScale = new Vector3(myTransform.localScale.x  * -1, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+	{			if (myRigidbody.velocity.x > 0){
+		myRigidbody.transform.localScale = new Vector3(myTransform.localScale.x  * -1, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);				myRigidbody.transform.localScale = new Vector3(- Mathf.Abs(myTransform.localScale.x) , myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+		} else {
+			myRigidbody.transform.localScale = new Vector3(Mathf.Abs(myTransform.localScale.x), myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+		}
 	}
 
 	void startFlip()
@@ -83,15 +90,20 @@ public class EnemyAI : MonoBehaviour
 	}
 
 	void EnemyTracking() {
-		Vector2 playerDirection = new Vector2(Player.transform.position.x - myTransform.position.x, Player.transform.position.y - myTransform.position.y).normalized;
-		Debug.Log(playerDirection.x + " " +  playerDirection.y);
-	}
+			Vector2 velocity = new Vector2((transform.position.x - Player.transform.position.x) * speed/3, (transform.position.y - Player.transform.position.y)* speed/3);
+			GetComponent<Rigidbody2D>().velocity = -velocity;
+			xStore = Mathf.Abs(myTransform.localScale.x);
+			if(Player.transform.position.x > transform.position.x){
+				myRigidbody.transform.localScale = new Vector3(xStore, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+			} else if (Player.transform.position.x < transform.position.x){
+				myRigidbody.transform.localScale = new Vector3(-xStore, myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+			}
+    }
 	
 	 private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Bullet")
         {
-			Debug.Log("test");
 			dead = true;
             deathAnimation();
             Instantiate (bubble, gameObject.transform.position, gameObject.transform.rotation);
@@ -100,8 +112,14 @@ public class EnemyAI : MonoBehaviour
 
 	void deathAnimation()
     {
+		IEnumerator revive(){
+        yield return new WaitForSeconds(10);
+        dead = false;
+    	}
+
         myRigidbody.velocity = new Vector2(0,2);
         myRigidbody.transform.localScale = new Vector3(myRigidbody.transform.localScale.x,- myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+		StartCoroutine(revive());
     }
 
 }
