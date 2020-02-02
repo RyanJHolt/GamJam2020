@@ -137,13 +137,13 @@ public class playerController : MonoBehaviour
         myRigidbody.transform.localScale = new Vector3(myRigidbody.transform.localScale.x, -myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
     }
 
-    void hurt()
+    public void hurt()
     {
         IEnumerator Respawn()
         {
-            yield return new WaitForSeconds(3);
-            myRigidbody.transform.position = spawnPoint;
-            dead = false;
+        yield return new WaitForSeconds(3);
+        myRigidbody.transform.position = spawnPoint;
+        dead = false;
         }
 
         deathAnimation();
