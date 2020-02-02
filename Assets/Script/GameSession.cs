@@ -32,7 +32,7 @@ public class GameSession : MonoBehaviour {
 
     public void addPlastic(int num) {
         plastic += num;
-        lightLevel.DimLights(num / maxPlastic);
+        lightLevel.DimLights(num / (float) maxPlastic);
     }
 
     public void takePlastic(int num) {
