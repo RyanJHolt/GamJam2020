@@ -14,11 +14,6 @@ public class playerController : MonoBehaviour {
     BoxCollider2D myBoxCollider;
     [SerializeField] GameObject myLightWrapper;
     GameSession session;
-    // public AudioClip Dash;
-    // AudioSource audioSource1;
-    // public AudioClip Die;
-    // AudioSource audioSource2;
-
 
     public float hMovement = 0f, vMovement = 0f;
     public float horizontalDirection = 1f, verticalDirection = 0f;
@@ -39,8 +34,6 @@ public class playerController : MonoBehaviour {
         session = GetComponent<GameSession>();
         myBoxCollider = GetComponentInChildren<BoxCollider2D>();
         spawnPoint = new Vector2(myRigidbody.transform.position.x,myRigidbody.transform.position.y);
-        //audioSource1 = new audioSource1(Dash, false, false, 0.8);
-        //audioSource2 = new audioSource2(Die, false, false, 0.8);
     }
 
     // Update is called once per frame
@@ -81,6 +74,7 @@ public class playerController : MonoBehaviour {
 
             myRigidbody.AddForce(direction);
         }
+
     }
 
     void spriteFlip() {
@@ -108,7 +102,7 @@ public class playerController : MonoBehaviour {
         }
 
         if (canDash && Input.GetAxisRaw("Jump") > 0) {
-            //audioSource1.Play();
+            //SoundManagerScript.PlaySound("Dash");
             Debug.Log("Dashing");
             dashing = true;
             canDash = false;
@@ -117,16 +111,12 @@ public class playerController : MonoBehaviour {
     }
 
     void deathAnimation() {
-        //audioSource2.Play();
+        //SoundManagerScript.PlaySound("Die");
+        myRigidbody.velocity = new Vector2(0,2);
         myRigidbody.transform.localScale = new Vector3(myRigidbody.transform.localScale.x,- myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
-        myRigidbody.velocity = new Vector2(0,20);
-    }       
+    }
 
-    public void hurt(){
-        if (dead)
-        {
-            return;
-        }
+    void hurt(){
         IEnumerator Respawn(){
         yield return new WaitForSeconds(3);
         myRigidbody.transform.position = spawnPoint;
@@ -135,8 +125,8 @@ public class playerController : MonoBehaviour {
 
         deathAnimation();
         FindObjectOfType<GameSession>().takeLives(1);
-        dead = true;
         if (FindObjectOfType<GameSession>().getPlayerLives() != 0){
+            dead = true;
             StartCoroutine(Respawn());
         }
         Debug.Log("Hit");
