@@ -119,8 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: -1
-  speed: 3
-  detectRange: 10
+  speed: 2.7
+  detectRange: 7
+  Range: 0
   turnTime: 82
   bubble: {fileID: 1035823138748395227, guid: 2fdd4a29f19091441aaf5a6d4f27cd72, type: 3}
 --- !u!61 &6549250273273226146
