@@ -81,6 +81,7 @@ public class playerController : MonoBehaviour
                     Mathf.Atan2(verticalDirection, horizontalDirection) * Mathf.Rad2Deg,
                     ref angleDelta, 1 / (5 * turnSpeed)
                 ) % 360;
+                if (angle < -180) angle += 360;
             }
             movingLeft = (angle < -90 || angle > 90);
 
@@ -141,9 +142,9 @@ public class playerController : MonoBehaviour
     {
         IEnumerator Respawn()
         {
-        yield return new WaitForSeconds(3);
-        myRigidbody.transform.position = spawnPoint;
-        dead = false;
+            yield return new WaitForSeconds(3);
+            myRigidbody.transform.position = spawnPoint;
+            dead = false;
         }
 
         deathAnimation();
