@@ -6,7 +6,7 @@ public class PlayerCollision : MonoBehaviour
 {
     Rigidbody2D myRigidbody;
     BoxCollider2D myBoxCollider;
-    public PlayerController Player;
+    //public PlayerController Player;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +20,9 @@ public class PlayerCollision : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag == "Enemy") {
-            Player.hurt();
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision) {
+    //    if (collision.tag == "Enemy") {
+    //        Player.hurt();
+    //    }
+    //}
 }
