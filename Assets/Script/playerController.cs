@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerController : MonoBehaviour {
+public class playerController : MonoBehaviour
+{
 
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float turnSpeed = 5f;
@@ -14,6 +15,9 @@ public class playerController : MonoBehaviour {
     BoxCollider2D myBoxCollider;
     [SerializeField] GameObject myLightWrapper;
     GameSession session;
+
+    AudioSource audioSource;
+    [SerializeField] AudioClip dashSfx;
 
     public float hMovement = 0f, vMovement = 0f;
     public float horizontalDirection = 1f, verticalDirection = 0f;
@@ -28,16 +32,19 @@ public class playerController : MonoBehaviour {
     Vector2 spawnPoint;
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         myRigidbody = GetComponentInChildren<Rigidbody2D>();
         rbScale = myRigidbody.transform.localScale;
         session = GetComponent<GameSession>();
         myBoxCollider = GetComponentInChildren<BoxCollider2D>();
-        spawnPoint = new Vector2(myRigidbody.transform.position.x,myRigidbody.transform.position.y);
+        spawnPoint = new Vector2(myRigidbody.transform.position.x, myRigidbody.transform.position.y);
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         if (dead)
         {
             return;
@@ -48,14 +55,18 @@ public class playerController : MonoBehaviour {
         spriteRotation();
     }
 
-    void movement() {
+    void movement()
+    {
         if (!allowMovement)
             return;
 
-        if (dashing) {
+        if (dashing)
+        {
             Vector2 direction = (Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right).normalized * moveSpeed * dashMultiplier / Time.deltaTime;
             myRigidbody.AddForce(direction);
-        } else {
+        }
+        else
+        {
             hMovement = Input.GetAxisRaw("Horizontal");
             vMovement = Input.GetAxisRaw("Vertical");
 
@@ -63,7 +74,8 @@ public class playerController : MonoBehaviour {
             verticalDirection = vMovement == 0 ? 0 : Mathf.Sign(vMovement);
 
             Vector2 direction = new Vector2(hMovement, vMovement).normalized * moveSpeed / Time.deltaTime;
-            if (hMovement != 0 || vMovement != 0) {
+            if (hMovement != 0 || vMovement != 0)
+            {
                 angle = Mathf.SmoothDampAngle(
                     angle,
                     Mathf.Atan2(verticalDirection, horizontalDirection) * Mathf.Rad2Deg,
@@ -77,22 +89,29 @@ public class playerController : MonoBehaviour {
 
     }
 
-    void spriteFlip() {
-        if (!movingLeft) {
+    void spriteFlip()
+    {
+        if (!movingLeft)
+        {
             myRigidbody.transform.localScale = rbScale;
             myLightWrapper.transform.localEulerAngles = new Vector3(0, 0, 0);
-        } else {
+        }
+        else
+        {
             myRigidbody.transform.localScale = Vector3.Scale(rbScale, new Vector3(1, -1, 1));
             myLightWrapper.transform.localEulerAngles = new Vector3(0, 0, 180);
         }
     }
 
-    void spriteRotation() {
+    void spriteRotation()
+    {
         myRigidbody.transform.localEulerAngles = new Vector3(0, 0, angle);
     }
 
-    void dash() {
-        IEnumerator endDash() {
+    void dash()
+    {
+        IEnumerator endDash()
+        {
             yield return new WaitForSeconds(dashDuration);
             dashing = false;
             Debug.Log("End dash");
@@ -101,8 +120,9 @@ public class playerController : MonoBehaviour {
             Debug.Log("Dash recharged");
         }
 
-        if (canDash && Input.GetAxisRaw("Jump") > 0) {
-            //SoundManagerScript.PlaySound("Dash");
+        if (canDash && Input.GetAxisRaw("Jump") > 0)
+        {
+            audioSource.PlayOneShot(dashSfx);
             Debug.Log("Dashing");
             dashing = true;
             canDash = false;
@@ -110,22 +130,26 @@ public class playerController : MonoBehaviour {
         }
     }
 
-    void deathAnimation() {
+    void deathAnimation()
+    {
         //SoundManagerScript.PlaySound("Die");
-        myRigidbody.velocity = new Vector2(0,2);
-        myRigidbody.transform.localScale = new Vector3(myRigidbody.transform.localScale.x,- myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
+        myRigidbody.velocity = new Vector2(0, 2);
+        myRigidbody.transform.localScale = new Vector3(myRigidbody.transform.localScale.x, -myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
     }
 
-    void hurt(){
-        IEnumerator Respawn(){
-        yield return new WaitForSeconds(3);
-        myRigidbody.transform.position = spawnPoint;
-        dead = false;
+    void hurt()
+    {
+        IEnumerator Respawn()
+        {
+            yield return new WaitForSeconds(3);
+            myRigidbody.transform.position = spawnPoint;
+            dead = false;
         }
 
         deathAnimation();
         FindObjectOfType<GameSession>().takeLives(1);
-        if (FindObjectOfType<GameSession>().getPlayerLives() != 0){
+        if (FindObjectOfType<GameSession>().getPlayerLives() != 0)
+        {
             dead = true;
             StartCoroutine(Respawn());
         }
@@ -133,5 +157,5 @@ public class playerController : MonoBehaviour {
     }
 
 
-    
+
 }
