@@ -102,7 +102,7 @@ public class playerController : MonoBehaviour {
         }
 
         if (canDash && Input.GetAxisRaw("Jump") > 0) {
-            SoundManagerScript.PlaySound("Dash");
+            //SoundManagerScript.PlaySound("Dash");
             Debug.Log("Dashing");
             dashing = true;
             canDash = false;
@@ -111,7 +111,7 @@ public class playerController : MonoBehaviour {
     }
 
     void deathAnimation() {
-        SoundManagerScript.PlaySound("Die");
+        //SoundManagerScript.PlaySound("Die");
         myRigidbody.velocity = new Vector2(0,2);
         myRigidbody.transform.localScale = new Vector3(myRigidbody.transform.localScale.x,- myRigidbody.transform.localScale.y, myRigidbody.transform.localScale.z);
     }
