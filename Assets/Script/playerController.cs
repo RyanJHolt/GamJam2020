@@ -147,14 +147,16 @@ public class playerController : MonoBehaviour
             dead = false;
         }
 
+        if(!dead){
         deathAnimation();
         FindObjectOfType<GameSession>().takeLives(1);
-        if (FindObjectOfType<GameSession>().getPlayerLives() != 0)
+        dead = true;
+        if (FindObjectOfType<GameSession>().getPlayerLives() > 0)
         {
-            dead = true;
             StartCoroutine(Respawn());
         }
         Debug.Log("Hit");
+        }
     }
 
 
