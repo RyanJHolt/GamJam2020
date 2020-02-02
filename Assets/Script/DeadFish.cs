@@ -29,6 +29,7 @@ public class DeadFish : MonoBehaviour
 		xScale = transform.localScale.x;
 		baseY = myTransform.position.y;
 		bobStore = bobRate;
+		bobHeight = 12;
 	}
 
 	// Update is called once per frame
