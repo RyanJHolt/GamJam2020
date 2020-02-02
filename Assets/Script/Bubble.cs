@@ -12,10 +12,17 @@ public class Bubble : MonoBehaviour
         myTransform = GetComponent<Transform>();
         myRigidbody = GetComponent<Rigidbody2D>();
         myRigidbody.velocity = new Vector2(0,2);
+        StartCoroutine(Despawn());
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    IEnumerator Despawn(){
+        yield return new WaitForSeconds(10);
+        Destroy (gameObject);
     }
 }
