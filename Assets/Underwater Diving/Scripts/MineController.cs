@@ -19,12 +19,13 @@ public class MineController : MonoBehaviour {
             AudioData.PlayOneShot(explosionSoundFile, 1.0f);
 			Destroy(gameObject);
 			Instantiate(explosionAnim, transform.position, Quaternion.identity);
-			Invoke("killSelf", 1f);
+			killSelf();
 		}	
 	}
 
-	void killSelf()
+	IEnumerator killSelf()
 	{
+		yield return new WaitForSeconds(1);
 		GameObject.Destroy(gameObject);
 	}
 }
